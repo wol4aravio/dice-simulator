@@ -1,13 +1,13 @@
 """Public request and response models for the dice API."""
 
-from pydantic import BaseModel
+from pydantic import BaseModel, StrictInt, StrictStr
 
 
 class RollRequest(BaseModel):
     """Payload accepted by the roll endpoint."""
 
-    expression: str
-    seed: int | None = None
+    expression: StrictStr
+    seed: StrictInt | None = None
 
 
 class RollGroup(BaseModel):
