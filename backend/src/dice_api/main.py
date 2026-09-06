@@ -6,9 +6,94 @@ from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse, Response
 
-from dice_api.models import RollRequest, RollResponse
+from dice_api.models import ErrorEnvelope, HealthResponse, RollRequest, RollResponse
 from dice_api.roller import roll
 from dice_api.validation import PublicRollError, validate_roll_request
+
+ROLL_ERROR_RESPONSES = {
+    400: {
+        "model": ErrorEnvelope,
+        "description": "Invalid JSON request body.",
+        "content": {
+            "application/json": {
+                "examples": {
+                    "invalid_json": {
+                        "summary": "Invalid JSON",
+                        "value": {
+                            "type": "https://dice-simulator.invalid/problems/invalid-json",
+                            "title": "Invalid JSON",
+                            "status": 400,
+                            "detail": "Request body must contain valid JSON.",
+                            "code": "invalid_json",
+                        },
+                    }
+                }
+            }
+        },
+    },
+    415: {
+        "model": ErrorEnvelope,
+        "description": "Unsupported request media type.",
+        "content": {
+            "application/json": {
+                "examples": {
+                    "unsupported_media_type": {
+                        "summary": "Unsupported media type",
+                        "value": {
+                            "type": "https://dice-simulator.invalid/problems/unsupported-media-type",
+                            "title": "Unsupported media type",
+                            "status": 415,
+                            "detail": "POST /roll requires application/json.",
+                            "code": "unsupported_media_type",
+                        },
+                    }
+                }
+            }
+        },
+    },
+    422: {
+        "model": ErrorEnvelope,
+        "description": "Invalid seed, expression, request field, or resource limit.",
+        "content": {
+            "application/json": {
+                "examples": {
+                    "invalid_seed": {
+                        "summary": "Invalid seed",
+                        "value": {
+                            "type": "https://dice-simulator.invalid/problems/invalid-seed",
+                            "title": "Invalid seed",
+                            "status": 422,
+                            "detail": "Seed must be an integer.",
+                            "code": "invalid_seed",
+                        },
+                    },
+                    "invalid_expression": {
+                        "summary": "Invalid expression",
+                        "value": {
+                            "type": "https://dice-simulator.invalid/problems/invalid-expression",
+                            "title": "Invalid expression",
+                            "status": 422,
+                            "detail": "Unsupported dice expression.",
+                            "code": "invalid_expression",
+                        },
+                    },
+                    "expression_limit_exceeded": {
+                        "summary": "Expression limit exceeded",
+                        "value": {
+                            "type": "https://dice-simulator.invalid/problems/expression-limit-exceeded",
+                            "title": "Expression limit exceeded",
+                            "status": 422,
+                            "detail": "Dice count exceeds the maximum.",
+                            "code": "expression_limit_exceeded",
+                            "limit": 1000,
+                            "actual": 1001,
+                        },
+                    },
+                }
+            }
+        },
+    },
+}
 
 app = FastAPI(title="Dice Simulator API", version="0.1.0")
 
@@ -83,13 +168,26 @@ def _public_error_response(error: PublicRollError) -> JSONResponse:
     )
 
 
-@app.get("/health")
-def health() -> dict[str, str]:
+@app.get(
+    "/health",
+    response_model=HealthResponse,
+    responses={
+        200: {
+            "description": "The API is ready to accept roll requests.",
+            "content": {
+                "application/json": {
+                    "example": {"status": "ok"},
+                }
+            },
+        }
+    },
+)
+def health() -> HealthResponse:
     """Report that the API is ready to accept roll requests."""
-    return {"status": "ok"}
+    return HealthResponse(status="ok")
 
 
-@app.post("/roll", response_model=RollResponse)
+@app.post("/roll", response_model=RollResponse, responses=ROLL_ERROR_RESPONSES)
 def roll_dice(request: RollRequest) -> RollResponse:
     """Validate and execute a dice roll request."""
     return roll(validate_roll_request(request.expression, request.seed))

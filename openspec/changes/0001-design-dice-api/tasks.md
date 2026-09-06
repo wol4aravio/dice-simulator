@@ -18,4 +18,4 @@
 ## 4. Verification and documentation
 
 - [x] 4.1 Add API contract tests for all scenarios in `specs/dice-api/spec.md`, and verify the full backend test suite passes.
-- [ ] 4.2 Publish OpenAPI-visible request, success, and error examples for `/health` and `/roll`, and verify generated API documentation reflects the specified contract.
+- [x] 4.2 Publish OpenAPI-visible request, success, and error examples for `/health` and `/roll`, and verify generated API documentation reflects the specified contract.
