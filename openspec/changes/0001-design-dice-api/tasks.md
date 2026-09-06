@@ -7,7 +7,7 @@
 
 - [x] 2.1 Implement parsing and normalization for one `NdM` expression with an optional signed modifier, and verify table-driven tests accept documented syntax and reject unsupported notation.
 - [x] 2.2 Implement pre-execution validation for expression length, dice count, sides, modifier, and seed bounds, and verify every limit produces the specified HTTP error code when integrated.
-- [ ] 2.3 Implement versioned deterministic seeded rolling plus entropy-backed seed generation for unseeded rolls, and verify identical expression/seed pairs reproduce values and totals.
+- [x] 2.3 Implement versioned deterministic seeded rolling plus entropy-backed seed generation for unseeded rolls, and verify identical expression/seed pairs reproduce values and totals.
 
 ## 3. HTTP endpoints
 
