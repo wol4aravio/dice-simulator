@@ -6,6 +6,7 @@ context: |
 
 rules:
   proposal:
+    - you must not read anything in `docs/` directory
     - every proposal name should have the preceding continuous numeration prefix with exactly 4 digits (use leading zeros to fullfill requirement)
     - always include date with timestamp in UTC
 
