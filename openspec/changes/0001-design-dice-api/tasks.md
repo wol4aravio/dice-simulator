@@ -12,7 +12,7 @@
 ## 3. HTTP endpoints
 
 - [x] 3.1 Add `GET /health` with the specified ready response, and verify an endpoint test receives HTTP 200 and `{"status":"ok"}`.
-- [ ] 3.2 Add `POST /roll` wired to parsing, validation, and roll execution, and verify endpoint tests cover successful rolls with and without a seed.
+- [x] 3.2 Add `POST /roll` wired to parsing, validation, and roll execution, and verify endpoint tests cover successful rolls with and without a seed.
 - [ ] 3.3 Map invalid JSON, media type, request fields, expression failures, and limit failures to the documented public error envelope, and verify endpoint tests assert status codes and machine-readable error codes.
 
 ## 4. Verification and documentation
