@@ -1,5 +1,14 @@
 schema: spec-driven
 
+context: |
+  Tech stack: python 3.13.* as main coding language, uv as package manager, FastAPI as main framework for API development, Docker for deployment
+  We ues conventional commits
+
+rules:
+  proposal:
+    - every proposal name should have the preceding continuous numeration prefix with exactly 4 digits (use leading zeros to fullfill requirement)
+    - always include date with timestamp in UTC
+
 # Project context (optional)
 # This is shown to AI when creating artifacts.
 # Add your tech stack, conventions, style guides, domain knowledge, etc.
