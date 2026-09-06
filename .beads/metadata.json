@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "embedded",
+  "dolt_database": "dice_simulator",
+  "project_id": "3da92ad2-7e8e-4fa0-92db-0df53a5b96fe"
+}
