@@ -1,6 +1,6 @@
 ## 1. Backend foundation
 
-- [ ] 1.1 Initialize the Python/FastAPI backend package and application entry point, and verify the application starts locally with the project package manager.
+- [x] 1.1 Initialize the Python/FastAPI backend package and application entry point, and verify the application starts locally with the project package manager.
 - [ ] 1.2 Define typed roll request, successful response, roll-group, and public error-envelope models, and verify serialization tests match the `dice-api` spec.
 
 ## 2. Roll domain logic

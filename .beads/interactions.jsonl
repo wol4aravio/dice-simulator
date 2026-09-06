@@ -1,0 +1,1 @@
+{"id":"int-e474d7dbc1dec7933c43325edf69b94f","kind":"field_change","created_at":"2026-09-06T15:48:00.998846Z","actor":"wol4aravio","issue_id":"dice-simulator-408.1","extra":{"field":"status","new_value":"closed","old_value":"in_progress","reason":"Completed FastAPI backend package and runnable application entry point."}}
