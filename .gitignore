@@ -1,12 +1,10 @@
-.claude
-.pi
-.opencode
-.hermes
+.DS_Store
+.env
+*.local
+node_modules/
 .venv/
-
-# Beads / Dolt files (added by bd init)
-.dolt/
-*.db
-.beads-credential-key
-.beads/proxieddb/
-*/**/__pycache__
+__pycache__/
+.pytest_cache/
+dist/
+.beads/dolt/
+.agent-runs/**/secrets*
