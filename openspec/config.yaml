@@ -1,0 +1,13 @@
+schema: spec-driven
+
+context: |
+  Tech stack: Python (FastAPI & Pydantic) for API, Vue + Vite for frontend, Python for CLI, Docker for distribution
+
+rules:
+  proposal:
+    - use Russian language as main one
+    - include timestamp in UTC for each proposal entry
+    - proposal filename must start with continuous numbering (strictly 4 digits so use leading zeros)
+  tasks:
+    - break tasks into atomic units with strictly defined bounds and scope
+    - break tasks into chunks of max 1 hours
