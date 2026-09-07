@@ -1,1 +1,0 @@
-"""Dice Simulator API package."""
