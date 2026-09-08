@@ -1,4 +1,4 @@
-# Proposal: 0001-initial-dice-api
+# Proposal: initial-dice-api
 
 ## Why
 Нужен минимальный HTTP API для броска костей как основа для frontend, CLI.
