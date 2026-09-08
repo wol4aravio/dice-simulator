@@ -6,7 +6,7 @@ context: |
 rules:
   proposal:
     - use Russian language as main one
-    - include timestamp in UTC for each proposal entry
+    - include timestamp in UTC for each proposal entry; place in right after `#Proposal ...` heading right before `##Why` via the template `Proposed at <TIMESTAMP>`
   tasks:
     - break tasks into atomic units with strictly defined bounds and scope
     - break tasks into chunks of max 1 hours
