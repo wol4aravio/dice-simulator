@@ -13,6 +13,6 @@ rules:
     - do not describe implementation
     - for each new answer field scenario with exact JSON example is required
   tasks:
-    - break tasks into atomic units with strictly defined bounds and scope
+    - break tasks into atomic units with strictly defined bounds and scope (each can be implemented via the only bounded agent run)
     - break tasks into chunks of max 1 hours
     - for each block the last task is `verifier` launch
