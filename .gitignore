@@ -7,3 +7,4 @@ __pycache__/
 .mini-agent/
 node_modules/
 dist/
+.DS_Store
