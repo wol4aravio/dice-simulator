@@ -39,5 +39,24 @@ def test_parse_endpoint():
     }
 
 
+def test_stats_endpoint():
+    r = client.get("/stats", params={"expr": "2d6kh1"})
+
+    assert r.status_code == 200
+    assert r.json() == {
+        "expression": "2d6kh1",
+        "min": 1,
+        "max": 6,
+        "mean": 161 / 36,
+    }
+
+
+def test_stats_invalid_expression_is_422_with_message():
+    r = client.get("/stats", params={"expr": "4d6kh5"})
+
+    assert r.status_code == 422
+    assert "between 1 and 4" in r.json()["detail"]
+
+
 def test_limits():
     assert client.get("/limits").json() == {"max_count": 1000, "max_sides": 10000}

@@ -9,7 +9,7 @@ from fastapi import FastAPI, HTTPException, Query
 from pydantic import BaseModel, Field
 
 from . import __version__
-from .dice import MAX_COUNT, MAX_SIDES, RollResult, parse, roll
+from .dice import MAX_COUNT, MAX_SIDES, DiceStats, RollResult, parse, roll, stats
 
 app = FastAPI(title="Dice API", version=__version__)
 
@@ -24,7 +24,7 @@ class RollResponse(BaseModel):
     total: int
 
     @classmethod
-    def from_result(cls, r: RollResult) -> "RollResponse":
+    def from_result(cls, r: RollResult) -> RollResponse:
         return cls(
             expression=r.expression, seed=r.seed, rolls=list(r.rolls), kept=list(r.kept),
             dropped=list(r.dropped), modifier=r.modifier, total=r.total,
@@ -39,6 +39,22 @@ class ParseResponse(BaseModel):
     keep: list | None
     min_total: int
     max_total: int
+
+
+class StatsResponse(BaseModel):
+    expression: str
+    min: int
+    max: int
+    mean: float
+
+    @classmethod
+    def from_result(cls, result: DiceStats) -> StatsResponse:
+        return cls(
+            expression=result.expression,
+            min=result.minimum,
+            max=result.maximum,
+            mean=result.mean,
+        )
 
 
 @app.get("/health")
@@ -56,6 +72,15 @@ def parse_expression(expr: str = Query(..., description="Dice notation, e.g. 4d6
         expression=str(d), count=d.count, sides=d.sides, modifier=d.modifier,
         keep=list(d.keep) if d.keep else None, min_total=d.min_total, max_total=d.max_total,
     )
+
+
+@app.get("/stats", response_model=StatsResponse)
+def dice_stats(expr: str = Query(..., description="Dice notation, e.g. 4d6kh3+1")) -> StatsResponse:
+    try:
+        result = stats(expr)
+    except ValueError as e:
+        raise HTTPException(status_code=422, detail=str(e)) from e
+    return StatsResponse.from_result(result)
 
 
 @app.get("/roll", response_model=RollResponse)
