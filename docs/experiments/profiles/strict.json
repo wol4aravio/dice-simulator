@@ -1,0 +1,5 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": ["docs/conventions.md"],
+  "permission": { "edit": "ask", "webfetch": "ask", "bash": { "*": "ask" } }
+}

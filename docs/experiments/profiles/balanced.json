@@ -1,0 +1,15 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": ["docs/conventions.md"],
+  "permission": {
+    "edit": "ask",
+    "webfetch": "ask",
+    "bash": {
+      "*": "ask",
+      "make test": "allow", "make lint": "allow", "uv run pytest*": "allow",
+      "git status*": "allow", "git diff*": "allow", "git log*": "allow",
+      "ls*": "allow", "rg*": "allow", "cat*": "allow",
+      "git push*": "deny", "rm -rf*": "deny"
+    }
+  }
+}
