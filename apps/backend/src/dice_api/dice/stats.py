@@ -48,6 +48,8 @@ def _expected_highest_sum(count: int, sides: int, kept: int) -> float:
 
 def _expected_capped_binomial(count: int, probability: float, cap: int) -> float:
     """Return E[min(cap, X)] for X distributed as Binomial(count, probability)."""
+    if cap == count:
+        return count * probability
     if probability == 0:
         return 0.0
     if probability == 1:
